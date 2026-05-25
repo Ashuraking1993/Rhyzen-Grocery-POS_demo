@@ -16,34 +16,44 @@ document.addEventListener(
                 const user =
                     document.getElementById(
                         "username"
-                    ).value;
+                    ).value.trim();
 
-                const pass =
-                    document.getElementById(
-                        "password"
-                    ).value;
-
-                if (
-                    user === "admin" &&
-                    pass === "Admin@123"
-                ) {
-
-                    localStorage.setItem(
-                        "rhyzen_auth",
-                        "true"
-                    );
-
-                    window.location.href =
-                        "dashboard.html";
-
-                } else {
+                if (user === "") {
 
                     alert(
-                        "Invalid credentials"
+                        "Please enter username"
                     );
 
+                    return;
                 }
+
+                localStorage.setItem(
+                    "rhyzen_auth",
+                    "true"
+                );
+
+                localStorage.setItem(
+                    "rhyzen_user",
+                    user
+                );
+
+                window.location.href =
+                    "dashboard.html";
 
             });
 
     });
+
+function logout() {
+
+    localStorage.removeItem(
+        "rhyzen_auth"
+    );
+
+    localStorage.removeItem(
+        "rhyzen_user"
+    );
+
+    window.location.href =
+        "index.html";
+}
